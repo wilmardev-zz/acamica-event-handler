@@ -32,3 +32,43 @@ const loadJsonTest = () => {
     Day: "Thursday"
   };
 };
+
+const inputJson = document.getElementById("json-button");
+
+const inputJsonEvent = event => {
+  console.log(event);
+  // Para remover el evento
+  inputJson.removeEventListener("keydown", inputJsonEvent);
+};
+
+inputJson.addEventListener("keydown", inputJsonEvent);
+
+// Saber con qué click hice el mouse down
+const button = document.getElementById("local-storage-button");
+button.addEventListener("mousedown", event => {
+  console.log(event);
+  switch (event.button) {
+    case 0:
+      alert("Izq");
+      break;
+    case 1:
+      alert("Medio");
+      break;
+    case 2:
+      alert("Derecho");
+      break;
+  }
+});
+
+window.onload = () => {
+  window.addEventListener("click", () => {
+    console.log("Segundo Momento");
+  });
+
+  document.body.addEventListener("click", event => {
+    console.log("Primer Momento");
+    console.log(event.target.innerHTML);
+    // Que el evento no se propage hacia el padre
+    event.stopPropagation();
+  });
+};
